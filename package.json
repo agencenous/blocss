@@ -1,0 +1,42 @@
+{
+  "name": "@agencenous/blocss",
+  "version": "0.0.30",
+  "description": "CSS editor for elements in Wordpress blocks",
+  "main": "src/index.jsx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "wp-scripts build --output-path=build",
+    "dev": "wp-scripts start --output-path=build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://githb.com/agencenous/blocss.git"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.5",
+    "@babel/preset-env": "^7.28.5",
+    "@babel/preset-react": "^7.28.5",
+    "@wordpress/block-editor": "^15.6",
+    "@wordpress/blocks": "^15.6",
+    "@wordpress/components": "^30.6",
+    "@wordpress/element": "^6.33",
+    "@wordpress/i18n": "^6.6",
+    "@wordpress/icons": "^11.2.0",
+    "@wordpress/scripts": "^30.26",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "keywords": [
+    "wordpress",
+    "gutenberg",
+    "react"
+  ],
+  "react-native": "src/index.jsx",
+  "author": "NOUS Ouvert Utile et Simple",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/agencenous/blocss/issues"
+  },
+  "homepage": "https://github.com/agencenous/blocss#readme"
+}
