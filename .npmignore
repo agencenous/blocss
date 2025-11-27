@@ -1,1 +1,9 @@
-files: ["build", "node_modules", "vendor", "bin", "composer.json", "composer.lock", "package-lock.json"]
+.github
+node_modules
+vendor
+bin
+composer.json
+composer.lock
+package-lock.json
+src
+*.php
