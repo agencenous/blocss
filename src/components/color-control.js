@@ -1,7 +1,6 @@
 import { Button, ColorPalette, Dropdown } from '@wordpress/components';
 
-const ColorControl = ( props ) => {
-    const { label, value, colors, onChange, enableAlpha } = props;
+const ColorControl = ( { label, value, colors, onChange, enableAlpha } ) => {
     return (
         <Dropdown
         renderToggle={ ( { isOpen, onToggle } ) => (

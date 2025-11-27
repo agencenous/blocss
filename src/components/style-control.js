@@ -1,7 +1,7 @@
 import React from 'react';
 import {__} from '@wordpress/i18n';
-import ColorControl from './color-control.jsx';
-import SizeControl from './typography/size-control.jsx';
+import ColorControl from './color-control.js';
+import SizeControl from './typography/size-control.js';
 
 const StyleControl = ( props ) => {
     const {
@@ -28,7 +28,7 @@ const StyleControl = ( props ) => {
             ) }
             { ( (color && color.text) || (color && color.background) ) && (
                 <div>
-                    <h4>{__('Color')}</h4>
+                    <h4>{__('Colors')}</h4>
                     { ColorControl && color && color.background && (
                         <ColorControl
                             label={__("Background Color")}
