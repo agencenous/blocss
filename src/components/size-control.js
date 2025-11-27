@@ -15,12 +15,12 @@ const SizeControl = ( props ) => {
     const [ sync, setSync ] = useState(false);
 
     let vals = [];
-    if(value && value.indexOf(' ') !== -1){
+    if(value && value.indexOf(' ') > -1){
         vals = value.split(' ');
     }
     // Ensure we have exactly four values for multi
     while (vals.length < 4) {
-        vals.push(value);
+        vals.push(value || null);
     }
 
     const setVal = ( index, val ) => {
@@ -44,55 +44,51 @@ const SizeControl = ( props ) => {
         __('Left'),
     ]
 
+    const units = [
+        { value: 'px', label: 'px', default: 0 },
+        { value: '%', label: '%', default: 0 },
+        { value: 'em', label: 'em', default: 0 },
+    ];
+
     return (
-        <Flex direction="column" gap={1}>
-        { multi && (
-            <Flex>
-                <FlexItem>
-                    {label}
-                </FlexItem>
-                <FlexItem>
-                    <Button onClick={handleChangeSync} size="small">
-                        <Icon icon={ sync ? link : linkOff } />
-                    </Button>
-                </FlexItem>
-            </Flex>
-        ) }
-        { (!multi || sync) ? (
-            <UnitControl
-                label={ label }
-                value={ value }
-                onChange={ onChange }
-                labelPosition="side"
-                units={ [
-                    { value: 'px', label: 'px', default: 0 },
-                    { value: '%', label: '%', default: 0 },
-                    { value: 'em', label: 'em', default: 0 },
-                ] }
-                isResetValueOnUnitChange={true}
-                />
-            ) : (
-                <Flex direction="column" gap={2}>
-                {vals.map( ( val, index ) => (
-                    <FlexItem key={index}>
-                        <UnitControl
-                            label={ valLabels[index] }
-                            value={ val || value }
-                            onChange={ (v) => setVal(index, v) }
-                            labelPosition="side"
-                            units={ [
-                                { value: 'px', label: 'px', default: 0 },
-                                { value: '%', label: '%', default: 0 },
-                                { value: 'em', label: 'em', default: 0 },
-                            ] }
-                            size="small"
-                            isResetValueOnUnitChange={true}
-                        />
-                    </FlexItem>
-            ))}
-            </Flex>
+      <Flex direction="column" gap={1}>
+        {multi && (
+          <Flex>
+            <FlexItem>{label}</FlexItem>
+            <FlexItem>
+              <Button onClick={handleChangeSync} size="small">
+                <Icon icon={sync ? link : linkOff} />
+              </Button>
+            </FlexItem>
+          </Flex>
         )}
-        </Flex>
+        {!multi || sync ? (
+          <UnitControl
+            label={label}
+            value={value}
+            onChange={onChange}
+            labelPosition="side"
+            units={units}
+            isResetValueOnUnitChange={true}
+          />
+        ) : (
+          <Flex direction="column" gap={2}>
+            {vals.map((val, index) => (
+              <FlexItem key={index}>
+                <UnitControl
+                  label={valLabels[index]}
+                  value={val || value}
+                  onChange={(v) => setVal(index, v)}
+                  labelPosition="side"
+                  units={units}
+                  size="small"
+                  isResetValueOnUnitChange={true}
+                />
+              </FlexItem>
+            ))}
+          </Flex>
+        )}
+      </Flex>
     );
 }
 
