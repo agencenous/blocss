@@ -2,6 +2,33 @@
 
 CSS editor for elements in Wordpress blocks
 
+```json
+{
+    "attributes": {
+        "boxStyle":  {
+            "type": "object",
+            "default": {
+                "fontSize": "1em",
+                "backgroudColor": "#ff0000"
+            }
+        },
+        "itemStyle":  {
+            "type": "object",
+            "default": {
+                "fontSize": "1em",
+                "color": "#ffffff"
+            }
+        }
+    }
+}
+```
+
+In the editor, use the **npm** library
+
+```bash
+npm install @agencenous/blocss
+```
+
 ```jsx
 const { InspectorControls, useBlockProps } = wp.blockEditor;
 import { PanelBody } from '@wordpress/components';
@@ -9,27 +36,60 @@ import { StyleControl } from '@agencenous/blocss';
 
 const blockProps = useBlockProps();
 const { 
-    item_style,
+    boxStyle,
+    itemStyle,
     } = attributes;
 
 const edit = ({ setAttributes, attributes }) => {
     return (
         <div className={className} {...blockProps}>
             <InspectorControls>
-                <PanelBody title={__("Items")} initialOpen={true}>
+                <PanelBody title={__("Box")} initialOpen={true}>
                     <StyleControl
-                        value={item_style}
-                        typography={{
-                            fontSize: true,
+                        value={boxStyle}
+                        font={{
+                            size: true,
                         }}
                         color={{
-                            background: true,
+                            background: true
+                        }}
+                        onChange={(value) => setAttributes({ boxStyle: value })}
+                    />
+                </PanelBody>
+                <PanelBody title={__("Items")} initialOpen={true}>
+                    <StyleControl
+                        value={itemStyle}
+                        font={{
+                            size: true,
+                        }}
+                        color={{
                             text: true
                         }}
-                        onChange={(value) => setAttributes({ item_style: value })}
+                        onChange={(value) => setAttributes({ itemStyle: value })}
                     />
                 </PanelBody>
             </InspectorControls>
         </div>
 )};
+```
+
+In the callback, use the **composer** library
+
+```bash
+composer install agencenous/blocss
+```
+
+```php
+function myblock_render_callback($attributes) {
+    $block_id = 'my-block-' . uniqid();
+    $css_rules = [
+        '.my-block' => $attributes['boxStyle'],
+        '.my-block .block-item' => $attributes['itemStyle'],
+    ];
+    return '<div id="'.esc_attr($block_id).'" class="my-block">
+        <h3>My block</h3>
+        <div class="block-item">Item 1</div>
+        <div class="block-item">Item 2</div>
+    </div>'.Blocss\inline_styles($css_rules, '#' . $block_id);
+}
 ```
