@@ -2,24 +2,24 @@ import React from 'react';
 import {__} from '@wordpress/i18n';
 import ColorControl from './color-control.js';
 import SizeControl from './size-control.js';
+import FontControl from "./font-control.js";
 
 const StyleControl = ( props ) => {
     const { onChange, value = {}, font, color } = props;
 
-    const { fontSize, backgroundColor, color: textColor } = value;
+    const { backgroundColor, color: textColor } = value;
 
     return (
       <fieldset className="blocss-style-control">
-        {font && font.size && SizeControl && (
+        {font && FontControl && (
           <div>
             <h4>{__("Typography")}</h4>
-            <SizeControl
-              label={__("Font Size")}
-              value={fontSize}
+            <FontControl
+              value={value}
               onChange={(newValue) =>
-                onChange({ ...value, fontSize: newValue })
+                onChange({ ...value, ...newValue })
               }
-              multi={false}
+              font={font}
             />
           </div>
         )}
