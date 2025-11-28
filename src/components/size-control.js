@@ -6,7 +6,7 @@ import {
     Flex,  FlexItem,
  } from '@wordpress/components';
  import {useState, useEffect } from '@wordpress/element';
- import { link, linkOff } from '@wordpress/icons';
+ import { closeSmall, create, link, linkOff } from "@wordpress/icons";
 
 
 const SizeControl = ( props ) => {
@@ -86,44 +86,59 @@ const SizeControl = ( props ) => {
 
     return (
       <Flex direction="column" gap={1}>
-        {multi && (
-          <Flex>
-            <FlexItem>{label}</FlexItem>
-            <FlexItem>
-              <Button 
-                onClick={handleChangeSync} size="small"
-                variant={sync === "none" ? "primary" : "secondary"}
-              >
-                <Icon icon={sync === "all" ? link : linkOff}/>
-              </Button>
-            </FlexItem>
-          </Flex>
-        )}
-        {!multi || sync==='all' ? (
-          <UnitControl
-            label={label}
-            value={value}
-            onChange={onChange}
-            labelPosition="side"
-            units={units}
-            isResetValueOnUnitChange={true}
-          />
+        {!value ? (
+          <Button onClick={() => onChange("2px")} size="small">
+            <Icon icon={create} />
+            {label}
+          </Button>
         ) : (
-          <Flex direction="column" gap={2}>
-            {vals.map((val, index) => (
-              <FlexItem key={index}>
-                <UnitControl
-                  label={valLabels[index]}
-                  value={val || value}
-                  onChange={(v) => setVal(index, v)}
-                  labelPosition="side"
-                  units={units}
+          <>
+          {multi && (
+            <Flex>
+              <FlexItem>{label}</FlexItem>
+              <FlexItem>
+                <Button
+                  onClick={handleChangeSync}
                   size="small"
-                  isResetValueOnUnitChange={true}
-                />
+                  variant={sync === "none" ? "primary" : "secondary"}
+                >
+                  <Icon icon={sync === "all" ? link : linkOff} />
+                </Button>
+                {value && (
+                  <Button onClick={() => onChange(null)} size="small">
+                    <Icon icon={closeSmall} />
+                  </Button>
+                )}
               </FlexItem>
-            ))}
-          </Flex>
+            </Flex>
+          )}
+          {(!multi || sync === "all") ? (
+            <UnitControl
+              label={label}
+              value={value}
+              onChange={onChange}
+              labelPosition="side"
+              units={units}
+              isResetValueOnUnitChange={true}
+            />
+          ) : (
+            <Flex direction="column" gap={2}>
+              {vals.map((val, index) => (
+                <FlexItem key={index}>
+                  <UnitControl
+                    label={valLabels[index]}
+                    value={val || value}
+                    onChange={(v) => setVal(index, v)}
+                    labelPosition="side"
+                    units={units}
+                    size="small"
+                    isResetValueOnUnitChange={true}
+                  />
+                </FlexItem>
+              ))}
+            </Flex>
+          )}
+          </>
         )}
       </Flex>
     );
