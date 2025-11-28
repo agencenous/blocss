@@ -7,6 +7,7 @@ const ColorControl = ( { label, value, colors, onChange, enableAlpha } ) => {
             <Button
                 onClick={ onToggle }
                 aria-expanded={ isOpen }
+                variant="secondary"
             >
                 <div style={{
                     width: '20px',
