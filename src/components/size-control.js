@@ -5,22 +5,44 @@ import {
     __experimentalUnitControl as UnitControl,
     Flex,  FlexItem,
  } from '@wordpress/components';
- import {useState } from '@wordpress/element';
+ import {useState, useEffect } from '@wordpress/element';
  import { link, linkOff } from '@wordpress/icons';
 
 
 const SizeControl = ( props ) => {
     const { label, value, onChange, multi=false } = props;
 
-    const [ sync, setSync ] = useState(false);
+    const [ sync, setSync ] = useState(null);
+
+    useEffect(() => {
+      if (value){
+        if(value.indexOf(" ") > -1) {
+          const _vals = value.split(" ");
+          if(_vals.length === 2){
+            setSync('opposite');
+          }
+          else{
+            setSync('none');
+          }
+        }
+        else {
+            setSync('all');
+        }
+      }
+    }, [value, multi]);
 
     let vals = [];
     if(value && value.indexOf(' ') > -1){
         vals = value.split(' ');
     }
-    // Ensure we have exactly four values for multi
-    while (vals.length < 4) {
+
+    const expectedLen = sync === 'all' ? 1 : ( sync === 'opposite' ? 2 : 4 );
+    // Ensure we have exactly expectedLen values
+    while (vals.length < expectedLen) {
         vals.push(value || null);
+    }
+    while (vals.length > expectedLen) {
+        vals.pop();
     }
 
     const setVal = ( index, val ) => {
@@ -30,9 +52,20 @@ const SizeControl = ( props ) => {
     };
 
     const handleChangeSync = ( ) => {
-        const newSync = !sync;
-        setSync( newSync );
-        if ( newSync ) {
+        if ( multi ) {
+            if(sync === 'all'){
+                setSync( 'opposite' );
+                onChange(`${vals[0]} ${vals[1]}`);
+            }
+            else if(sync === 'opposite'){
+                setSync('none');
+            }
+            else{
+                setSync( 'all' );
+                onChange( vals[0] );
+            }
+        } else {
+            setSync( 'all' );
             onChange( vals[0] );
         }
     }
@@ -45,9 +78,10 @@ const SizeControl = ( props ) => {
     ]
 
     const units = [
-        { value: 'px', label: 'px', default: 0 },
+        { value: 'px', label: 'px', default: 2 },
         { value: '%', label: '%', default: 0 },
-        { value: 'em', label: 'em', default: 0 },
+        { value: 'em', label: 'em', default: 1 },
+        { value: 'rem', label: 'rem', default: 1 },
     ];
 
     return (
@@ -56,13 +90,16 @@ const SizeControl = ( props ) => {
           <Flex>
             <FlexItem>{label}</FlexItem>
             <FlexItem>
-              <Button onClick={handleChangeSync} size="small">
-                <Icon icon={sync ? link : linkOff} />
+              <Button 
+                onClick={handleChangeSync} size="small"
+                variant={sync === "none" ? "primary" : "secondary"}
+              >
+                <Icon icon={sync === "all" ? link : linkOff}/>
               </Button>
             </FlexItem>
           </Flex>
         )}
-        {!multi || sync ? (
+        {!multi || sync==='all' ? (
           <UnitControl
             label={label}
             value={value}
