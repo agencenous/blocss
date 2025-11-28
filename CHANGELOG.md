@@ -1,3 +1,7 @@
+v0.1.1
+
+- Keep `src` in package
+
 v0.1.0
 
 - Add support for margin and padding
