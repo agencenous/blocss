@@ -1,6 +1,6 @@
 {
     "name": "agencenous/blocss",
-    "version": "0.0.64",
+    "version": "0.1.0",
     "description": "CSS editor for elements in Wordpress blocks",
     "type": "wordpress-package",
     "license": "GPL-3.0-or-later",
