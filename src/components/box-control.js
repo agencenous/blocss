@@ -25,6 +25,18 @@ const BoxControl = (props) => {
           />
         </PanelRow>
       )}
+      {box && box.margin && SizeControl && (
+        <PanelRow>
+          {labels && <ControlLabel label={__("Margin")} />}
+          <SizeControl
+            value={margin}
+            onChange={(newValue) => {
+                onChange({ ...value, margin: newValue });
+            }}
+            multi={true}
+          />
+        </PanelRow>
+      )}
     </fieldset>
   );
 };
