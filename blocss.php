@@ -1,7 +1,7 @@
 <?php
 namespace Blocss;
 
-function inline_styles($css_rules, $prefix_selector) {
+function generate_css($css_rules, $prefix_selector){
     $styles = '';
     foreach ($css_rules as $sub_selector => $rules) {
         $styles .= $prefix_selector . ' ' . $sub_selector . ' {';
@@ -14,5 +14,9 @@ function inline_styles($css_rules, $prefix_selector) {
         }
         $styles .= '}';
     }
-    return sprintf('<style>%s</style>', $styles);
+    return $styles;
+}
+
+function inline_styles($css_rules, $prefix_selector) {
+    return sprintf('<style>%s</style>', generate_css($css_rules, $prefix_selector));
 }

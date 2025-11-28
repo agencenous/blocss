@@ -1,6 +1,7 @@
 v0.1.1
 
 - Keep `src` in package
+- Add `generate_css` function
 
 v0.1.0
 
