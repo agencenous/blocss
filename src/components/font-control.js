@@ -71,7 +71,7 @@ const FontControl = ( props ) => {
                       aria-pressed={fontWeight === "bold"}
                       size="small"
                     >
-                      <Icon icon={formatBold} />
+                      <Icon icon={formatBold} size={12} />
                     </Button>
                   </FlexItem>
                 )}
@@ -88,7 +88,7 @@ const FontControl = ( props ) => {
                       aria-pressed={fontStyle === "italic"}
                       size="small"
                     >
-                      <Icon icon={formatItalic} />
+                      <Icon icon={formatItalic} size={12} />
                     </Button>
                   </FlexItem>
                 )}
@@ -109,7 +109,7 @@ const FontControl = ( props ) => {
                       aria-pressed={textDecoration === "underline"}
                       size="small"
                     >
-                      <Icon icon={formatUnderline} />
+                      <Icon icon={formatUnderline} size={12} />
                     </Button>
                   </FlexItem>
                 )}
@@ -130,7 +130,7 @@ const FontControl = ( props ) => {
                       aria-pressed={textTransform === "uppercase"}
                       size="small"
                     >
-                      <Icon icon={formatCapitalize} />
+                      <Icon icon={formatCapitalize} size={12} />
                     </Button>
                   </FlexItem>
                 )}
