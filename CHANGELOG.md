@@ -1,9 +1,25 @@
+v0.2.0
+
+Frontend:
+
+- Add support for label in `StyleControl` component
+
+Backend: 
+
+- Support native WP vars as value
+
 v0.1.1
 
+Frontend:
+
 - Keep `src` in package
+
+Backend:
 - Add `generate_css` function
 
 v0.1.0
+
+Frontend:
 
 - Add support for margin and padding
 - Button style for colorControl
