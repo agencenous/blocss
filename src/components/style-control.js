@@ -6,12 +6,20 @@ import FontControl from "./font-control.js";
 import ControlLabel from "./control-label.js";
 
 const StyleControl = ( props ) => {
-    const { onChange, value = {}, font, color, box, labels=true } = props;
+    const { onChange, value = {}, label, font, color, box, labels=true } = props;
 
     const { backgroundColor, color: textColor } = value;
 
     return (
       <fieldset className="blocss-style-control">
+        {label && (
+          <h2
+            data-wp-component="Heading"
+            class="components-truncate components-text components-heading"
+          >
+            {label}
+          </h2>
+        )}
         {font && FontControl && (
           <div>
             {labels && <ControlLabel label={__("Typography")} />}
