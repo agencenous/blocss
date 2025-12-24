@@ -9,7 +9,7 @@ import ControlLabel from "./control-label.js";
 const BoxControl = (props) => {
   const { onChange, value = {}, box, labels = true } = props;
 
-  const { padding, margin, borderRadius } = value;
+  const { padding, margin } = value;
 
   return (
     <fieldset className="blocss-style-control">

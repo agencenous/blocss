@@ -2,11 +2,12 @@ import React from 'react';
 import {__} from '@wordpress/i18n';
 import ColorControl from './color-control.js';
 import BoxControl from "./box-control.js";
+import BorderControl from "./border-control.js";
 import FontControl from "./font-control.js";
 import ControlLabel from "./control-label.js";
 
 const StyleControl = ( props ) => {
-    const { onChange, value = {}, label, font, color, box, labels=true } = props;
+    const { onChange, value = {}, label, font, color, border, box, labels=true } = props;
 
     const { backgroundColor, color: textColor } = value;
 
@@ -58,6 +59,16 @@ const StyleControl = ( props ) => {
               value={value}
               onChange={(newValue) => onChange({ ...value, ...newValue })}
               box={box}
+            />
+          </div>
+        )}
+        {border && BorderControl && (
+          <div>
+            {labels && <ControlLabel label={__("Border")} />}
+            <BorderControl
+              value={value}
+              onChange={(newValue) => onChange({ ...value, ...newValue })}
+              border={border}
             />
           </div>
         )}
