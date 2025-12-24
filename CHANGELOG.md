@@ -1,3 +1,13 @@
+v0.3.0
+
+Frontend:
+
+- Add `BorderControl` component
+
+Backend:
+
+- Add comments
+
 v0.2.0
 
 Frontend:
