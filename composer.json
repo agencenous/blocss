@@ -29,7 +29,8 @@
             "package.json",
             "package-lock.json",
             ".babelrc",
-            "src"
+            ".npmignore",
+            "/src"
         ]
     }
 }
