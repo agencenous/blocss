@@ -1,3 +1,8 @@
+v0.3.1
+
+- Update example in README
+- Cleanup files in package
+
 v0.3.0
 
 Frontend:
