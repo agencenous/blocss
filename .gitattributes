@@ -1,0 +1,10 @@
+# Exclude npm files and node_modules from git archives (packagist / git archive)
+node_modules/ export-ignore
+/package.json export-ignore
+/package-lock.json export-ignore
+/yarn.lock export-ignore
+/.npmrc export-ignore
+/npm-debug.log export-ignore
+/.github/ export-ignore
+/test/ export-ignore
+/tests/ export-ignore
