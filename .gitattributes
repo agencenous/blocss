@@ -6,5 +6,8 @@ node_modules/ export-ignore
 /.npmrc export-ignore
 /npm-debug.log export-ignore
 /.github/ export-ignore
+/.babelrc export-ignore
+/.npmignore export-ignore
 /test/ export-ignore
 /tests/ export-ignore
+/src/ export-ignore
