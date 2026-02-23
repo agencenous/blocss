@@ -1,6 +1,21 @@
 # Blocss
 
-CSS editor for elements in Wordpress blocks
+Two in one CSS editor for elements in Wordpress blocks.
+
+- The `@agencenous/blocss` NPM library to use in block editor
+- The `agencenous/blocss` Composer library to use in the PHP callback function
+
+## Frontend
+
+You can add style attributes to your blocks. It will allow editors to apply style in the editor UI.
+
+Add the depency:
+
+```bash
+npm install @agencenous/blocss
+```
+
+Just add attributes in the `block.json` file. If you need to manage many styles, no pronlem, you can add as many attributes as you need.
 
 ```json
 {
@@ -24,10 +39,6 @@ CSS editor for elements in Wordpress blocks
 ```
 
 In the editor, use the **npm** library
-
-```bash
-npm install @agencenous/blocss
-```
 
 ```jsx
 const { InspectorControls, useBlockProps } = wp.blockEditor;
@@ -76,6 +87,8 @@ const edit = ({ setAttributes, attributes }) => {
         </div>
 )};
 ```
+
+## Backend
 
 In the callback, use the **composer** library
 
