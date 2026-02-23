@@ -1,3 +1,9 @@
+## v0.3.3
+
+- Fix sync of sub attributes
+- Add conf file for dependatbot
+- Update dependencies
+
 ## v0.3.2
 
 - Cleanup files in package
