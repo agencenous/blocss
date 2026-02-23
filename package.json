@@ -31,7 +31,7 @@
     "@babel/preset-react": "^7.28.5",
     "@wordpress/block-editor": "^15.6",
     "@wordpress/blocks": "^15.6",
-    "@wordpress/components": "^30.6",
+    "@wordpress/components": "^32.2",
     "@wordpress/element": "^6.33",
     "@wordpress/i18n": "^6.6",
     "@wordpress/icons": "^11.2.0",
