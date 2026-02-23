@@ -59,11 +59,15 @@ const edit = ({ setAttributes, attributes }) => {
                 <PanelBody title={__("Items")} initialOpen={true}>
                     <StyleControl
                         value={itemStyle}
-                        font={{
-                            size: true,
+                        border={{
+                            radius: true,
+                            width: true,
+                            color: true,
+                            style: true,
                         }}
-                        color={{
-                            text: true
+                        box={{
+                            padding: true,
+                            margin: true,
                         }}
                         onChange={(value) => setAttributes({ itemStyle: value })}
                     />

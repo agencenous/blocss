@@ -1,4 +1,14 @@
-v0.3.0
+## v0.3.2
+
+- Cleanup files in package
+- format changelog
+
+## v0.3.1
+
+- Update example in README
+- Cleanup files in package
+
+## v0.3.0
 
 Frontend:
 
@@ -8,7 +18,7 @@ Backend:
 
 - Add comments
 
-v0.2.0
+## v0.2.0
 
 Frontend:
 
@@ -18,7 +28,7 @@ Backend:
 
 - Support native WP vars as value
 
-v0.1.1
+## v0.1.1
 
 Frontend:
 
@@ -27,7 +37,7 @@ Frontend:
 Backend:
 - Add `generate_css` function
 
-v0.1.0
+## v0.1.0
 
 Frontend:
 
@@ -35,14 +45,14 @@ Frontend:
 - Button style for colorControl
 - Smaller icon size for fontControl
 
-v0.0.62
+## v0.0.62
 
 - Add support fontWeight, fontSize, textDecoration and textTransform
 
-v0.0.56
+## v0.0.56
 
 - ~~typography~~ prop is replaced by `font={}`
 
-v0.0.52
+## v0.0.52
 
 - Initial beta

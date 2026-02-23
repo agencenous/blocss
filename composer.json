@@ -1,6 +1,6 @@
 {
     "name": "agencenous/blocss",
-    "version": "0.3.0",
+    "version": "0.3.2",
     "description": "CSS editor for elements in Wordpress blocks",
     "type": "wordpress-package",
     "license": "GPL-3.0-or-later",
@@ -21,5 +21,16 @@
     },
     "require-dev": {
         "agencenous/bump-version": "dev-main"
+    },
+    "archive": {
+        "exclude": [
+            "/node_modules",
+            "node_modules/",
+            "package.json",
+            "package-lock.json",
+            ".babelrc",
+            ".npmignore",
+            "/src"
+        ]
     }
 }
