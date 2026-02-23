@@ -35,7 +35,7 @@
     "@wordpress/element": "^6.33",
     "@wordpress/i18n": "^6.6",
     "@wordpress/icons": "^11.2.0",
-    "@wordpress/scripts": "^30.26",
+    "@wordpress/scripts": "^31.5",
     "react": "^19.2.4",
     "react-dom": "^19.2.4"
   }
