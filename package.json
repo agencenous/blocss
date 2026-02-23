@@ -25,18 +25,18 @@
   "react-native": "src/index.js",
   "wpScript": true,
   "dependencies": {
-    "@babel/cli": "^7.28.3",
-    "@babel/core": "^7.28.5",
-    "@babel/preset-env": "^7.28.5",
-    "@babel/preset-react": "^7.28.5",
-    "@wordpress/block-editor": "^15.6",
-    "@wordpress/blocks": "^15.6",
+    "@babel/cli": "^7.28",
+    "@babel/core": "^7.29",
+    "@babel/preset-env": "^7.29",
+    "@babel/preset-react": "^7.28",
+    "@wordpress/block-editor": "^15.13",
+    "@wordpress/blocks": "^15.13",
     "@wordpress/components": "^32.2",
-    "@wordpress/element": "^6.33",
-    "@wordpress/i18n": "^6.6",
+    "@wordpress/element": "^6.40",
+    "@wordpress/i18n": "^6.13",
     "@wordpress/icons": "^11.2.0",
     "@wordpress/scripts": "^31.5",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "^18.3",
+    "react-dom": "^18.3"
   }
 }
