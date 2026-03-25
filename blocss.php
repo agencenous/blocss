@@ -7,7 +7,7 @@ namespace Blocss;
  * @param mixed $value The value to transform.
  * @return mixed The transformed value.
  */
-function transform_wp_vars($value){
+function transform_wp_vars(mixed $value): mixed {
     if (is_array($value)) {
         foreach ($value as $key => $val) {
             $value[$key] = transform_wp_vars($val);
@@ -26,7 +26,7 @@ function transform_wp_vars($value){
  * @param string $prefix_selector The prefix selector.
  * @return string The generated CSS styles.
  */
-function generate_css($css_rules, $prefix_selector){
+function generate_css(array $css_rules, string $prefix_selector): string {
     $styles = '';
     foreach ($css_rules as $sub_selector => $rules) {
         $styles .= $prefix_selector . ' ' . $sub_selector . ' {';
@@ -51,6 +51,6 @@ function generate_css($css_rules, $prefix_selector){
  * @param string $prefix_selector The prefix selector.
  * @return string The inline CSS styles.
  */
-function inline_styles($css_rules, $prefix_selector) {
+function inline_styles(array $css_rules, string $prefix_selector): string {
     return sprintf('<style>%s</style>', generate_css($css_rules, $prefix_selector));
 }
