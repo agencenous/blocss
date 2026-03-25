@@ -1,3 +1,8 @@
+## v0.3.4
+
+- Type params in PHP functions
+- Update NPM dependencies
+
 ## v0.3.3
 
 - Fix sync of sub attributes
