@@ -1,6 +1,7 @@
 import { __ } from "@wordpress/i18n";
 import {
   Button,
+  ComboboxControl,
   Flex,
   FlexItem,
   FontSizePicker,
@@ -14,14 +15,50 @@ import {
   formatUnderline,
 } from "@wordpress/icons";
 
+const FONT_FAMILIES = [
+  { value: "", label: __("Default") },
+  { value: "Arial, sans-serif", label: "Arial" },
+  { value: "Georgia, serif", label: "Georgia" },
+  { value: "'Helvetica Neue', Helvetica, sans-serif", label: "Helvetica" },
+  { value: "'Times New Roman', Times, serif", label: "Times New Roman" },
+  { value: "Verdana, sans-serif", label: "Verdana" },
+  { value: "'Trebuchet MS', sans-serif", label: "Trebuchet MS" },
+  { value: "'Courier New', monospace", label: "Courier New" },
+  { value: "system-ui, sans-serif", label: "System UI" },
+  { value: "'Segoe UI', sans-serif", label: "Segoe UI" },
+  { value: "Roboto, sans-serif", label: "Roboto" },
+  { value: "'Open Sans', sans-serif", label: "Open Sans" },
+  { value: "Lato, sans-serif", label: "Lato" },
+  { value: "Montserrat, sans-serif", label: "Montserrat" },
+  { value: "Poppins, sans-serif", label: "Poppins" },
+  { value: "'Playfair Display', serif", label: "Playfair Display" },
+  { value: "Raleway, sans-serif", label: "Raleway" },
+  { value: "'Source Sans Pro', sans-serif", label: "Source Sans Pro" },
+  { value: "Inter, sans-serif", label: "Inter" },
+];
 
 const FontControl = ( props ) => {
     const { value, onChange, font } = props;
-    const { fontSize, fontWeight, fontStyle, textDecoration, textTransform } =
+    const { fontFamily, fontSize, fontWeight, fontStyle, textDecoration, textTransform } =
       value;
 
     return (
       <>
+        {font && font.family && (
+          <PanelRow>
+            <div style={{ width: "100%" }}>
+              <ComboboxControl
+                label={__("Font Family")}
+                value={fontFamily || ""}
+                options={FONT_FAMILIES}
+                onChange={(newValue) =>
+                  onChange({ ...value, fontFamily: newValue || undefined })
+                }
+                allowReset
+              />
+            </div>
+          </PanelRow>
+        )}
         {font && font.size && (
           <PanelRow>
             <div style={{ width: "100%" }}>
