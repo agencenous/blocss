@@ -25,11 +25,14 @@ const BorderControl = (props) => {
               color: (border.color && borderColor) || null,
             }}
             onChange={(newValue) => {
+              const newWidth = (border.width && newValue.width) || null;
+              const newColor = (border.color && newValue.color) || null;
+              const newStyle = (border.style && newValue.style) || null;
               onChange({
                 ...value,
-                borderStyle: (border.style && newValue.style) || null,
-                borderWidth: (border.width && newValue.width) || null,
-                borderColor: (border.color && newValue.color) || null,
+                borderStyle: newStyle || (newWidth || newColor ? 'solid' : null),
+                borderWidth: newWidth,
+                borderColor: newColor,
               });
             }}
           />

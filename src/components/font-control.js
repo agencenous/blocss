@@ -8,6 +8,7 @@ import {
   Icon,
   PanelRow,
 } from "@wordpress/components";
+import { useSelect } from "@wordpress/data";
 import {
   formatBold,
   formatCapitalize,
@@ -15,7 +16,7 @@ import {
   formatUnderline,
 } from "@wordpress/icons";
 
-const FONT_FAMILIES = [
+const DEFAULT_FONT_FAMILIES = [
   { value: "", label: __("Default") },
   { value: "Arial, sans-serif", label: "Arial" },
   { value: "Georgia, serif", label: "Georgia" },
@@ -37,10 +38,47 @@ const FONT_FAMILIES = [
   { value: "Inter, sans-serif", label: "Inter" },
 ];
 
+const useThemeFontFamilies = () => {
+  return useSelect((select) => {
+    try {
+      const settings = select("core/block-editor").getSettings();
+      const fontFamilies =
+        settings?.typography?.fontFamilies ||
+        settings?.__experimentalFeatures?.typography?.fontFamilies;
+      if (!fontFamilies) return [];
+      const allFonts = [
+        ...(fontFamilies.theme || []),
+        ...(fontFamilies.custom || []),
+      ];
+      return allFonts.map((f) => ({
+        value: f.fontFamily,
+        label: f.name || f.slug,
+      }));
+    } catch (e) {
+      return [];
+    }
+  }, []);
+};
+
+const useFontFamilies = () => {
+  const themeFonts = useThemeFontFamilies();
+  if (themeFonts.length === 0) return DEFAULT_FONT_FAMILIES;
+  const defaultValues = new Set(DEFAULT_FONT_FAMILIES.map((f) => f.value));
+  const uniqueThemeFonts = themeFonts.filter(
+    (f) => f.value && !defaultValues.has(f.value)
+  );
+  return [
+    { value: "", label: __("Default") },
+    ...uniqueThemeFonts,
+    ...DEFAULT_FONT_FAMILIES.slice(1),
+  ];
+};
+
 const FontControl = ( props ) => {
     const { value, onChange, font } = props;
     const { fontFamily, fontSize, fontWeight, fontStyle, textDecoration, textTransform } =
       value;
+    const fontFamilies = useFontFamilies();
 
     return (
       <>
@@ -50,7 +88,7 @@ const FontControl = ( props ) => {
               <ComboboxControl
                 label={__("Font Family")}
                 value={fontFamily || ""}
-                options={FONT_FAMILIES}
+                options={fontFamilies}
                 onChange={(newValue) =>
                   onChange({ ...value, fontFamily: newValue || undefined })
                 }
