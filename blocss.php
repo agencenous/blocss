@@ -30,6 +30,9 @@ function generate_css(array $css_rules, string $prefix_selector): string {
     $styles = '';
     foreach ($css_rules as $sub_selector => $rules) {
         $styles .= $prefix_selector . ' ' . $sub_selector . ' {';
+        if ((!empty($rules['borderWidth']) || !empty($rules['borderColor'])) && empty($rules['borderStyle'])) {
+            $rules['borderStyle'] = 'solid';
+        }
         foreach ($rules as $property => $value) {
             if ($value === null) {
                 continue;
