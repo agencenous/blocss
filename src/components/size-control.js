@@ -16,6 +16,8 @@ import {
     sidesRight,
     sidesBottom,
     sidesLeft,
+    sidesHorizontal,
+    sidesVertical,
 } from "@wordpress/icons";
 
 const SizeControl = (props) => {
@@ -135,7 +137,9 @@ const SizeControl = (props) => {
         onChange(nextValue);
     };
 
-    const valIcons = [sidesTop, sidesRight, sidesBottom, sidesLeft];
+    const valIcons = sync === 'opposite'
+        ? [sidesVertical, sidesHorizontal]
+        : [sidesTop, sidesRight, sidesBottom, sidesLeft];
 
     const units = [
         { value: 'px', label: 'px', default: 2 },
