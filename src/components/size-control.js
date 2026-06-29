@@ -1,5 +1,6 @@
 import { __ } from '@wordpress/i18n';
 import {
+    BaseControl,
     Button,
     Icon,
     __experimentalUnitControl as UnitControl,
@@ -159,15 +160,21 @@ const SizeControl = (props) => {
     return (
         <Flex direction="column" gap={1}>
             {!value ? (
-                <Button onClick={() => onChange("2px")} size="small">
-                    <Icon icon={create} />
-                    {label}
-                </Button>
+                <Flex justify="space-between" align="center">
+                    <FlexItem><BaseControl.VisualLabel>{label}</BaseControl.VisualLabel></FlexItem>
+                    <FlexItem>
+                        <Flex gap={1}>
+                            <Button onClick={() => onChange("2px")} size="small">
+                                <Icon icon={create} />
+                            </Button>
+                        </Flex>
+                    </FlexItem>
+                </Flex>
             ) : (
                 <>
                     {multi && (
                         <Flex justify="space-between" align="center">
-                            <FlexItem>{label}</FlexItem>
+                            <FlexItem><BaseControl.VisualLabel>{label}</BaseControl.VisualLabel></FlexItem>
                             <FlexItem>
                                 <Flex gap={1}>
                                     <Button
@@ -186,17 +193,19 @@ const SizeControl = (props) => {
                     )}
 
                     {sync === 'all' ? (
-                        <UnitControl
-                            label={!multi ? label : null}
-                            value={value}
-                            onChange={(v) => {
-                                modeValuesRef.current.all = v;
-                                onChange(v);
-                            }}
-                            labelPosition="side"
-                            units={units}
-                            isResetValueOnUnitChange={true}
-                        />
+                        <>
+                            {!multi && <BaseControl.VisualLabel>{label}</BaseControl.VisualLabel>}
+                            <UnitControl
+                                value={value}
+                                onChange={(v) => {
+                                    modeValuesRef.current.all = v;
+                                    onChange(v);
+                                }}
+                                labelPosition="side"
+                                units={units}
+                                isResetValueOnUnitChange={true}
+                            />
+                        </>
                     ) : (
                         <Flex direction="column" gap={2} style={{ marginTop: '8px' }}>
                             {indicesToShow.map((index) => (
