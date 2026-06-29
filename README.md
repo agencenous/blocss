@@ -60,6 +60,7 @@ const edit = ({ setAttributes, attributes }) => {
                         value={boxStyle}
                         font={{
                             size: true,
+                            family: true,
                         }}
                         color={{
                             background: true
