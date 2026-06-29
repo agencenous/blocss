@@ -30,7 +30,7 @@ const BorderControl = (props) => {
               const newStyle = (border.style && newValue.style) || null;
               onChange({
                 ...value,
-                borderStyle: newStyle || (newWidth || newColor ? 'solid' : null),
+                borderStyle: newStyle || (newWidth || newColor ? "solid" : null),
                 borderWidth: newWidth,
                 borderColor: newColor,
               });
