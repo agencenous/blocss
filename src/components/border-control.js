@@ -1,6 +1,6 @@
 import React from "react";
 import { __ } from "@wordpress/i18n";
-import { PanelRow, BorderBoxControl } from "@wordpress/components";
+import { BaseControl, PanelRow, BorderBoxControl } from "@wordpress/components";
 
 import SizeControl from "./size-control.js";
 import ControlLabel from "./control-label.js";
@@ -12,10 +12,8 @@ const BorderControl = (props) => {
   return (
     <fieldset className="blocss-style-control">
       {border && border.style && BorderBoxControl && (
-        <div style={{ width: "100%", marginTop: "12px", marginBottom: "12px" }}>
-          <label className="components-base-control__label" style={{ display: "block", marginBottom: "16px" }}>
-            {__("Border")}
-          </label>
+        <BaseControl>
+          <BaseControl.VisualLabel>{__("Border")}</BaseControl.VisualLabel>
           <BorderBoxControl
             hideLabelFromVision
             enableStyle={border.style}
@@ -36,10 +34,10 @@ const BorderControl = (props) => {
               });
             }}
           />
-        </div>
+        </BaseControl>
       )}
       {border && border.radius && SizeControl && (
-        <PanelRow>
+        <BaseControl>
           <SizeControl
             label={labels && __("Border Radius")}
             value={borderRadius}
@@ -48,7 +46,7 @@ const BorderControl = (props) => {
             }}
             multi={true}
           />
-        </PanelRow>
+        </BaseControl>
       )}
     </fieldset>
   );
