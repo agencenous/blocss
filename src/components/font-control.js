@@ -1,12 +1,14 @@
 import { __ } from "@wordpress/i18n";
 import {
   Button,
+  ComboboxControl,
   Flex,
   FlexItem,
   FontSizePicker,
   Icon,
   PanelRow,
 } from "@wordpress/components";
+import { useSelect } from "@wordpress/data";
 import {
   formatBold,
   formatCapitalize,
@@ -14,14 +16,87 @@ import {
   formatUnderline,
 } from "@wordpress/icons";
 
+const DEFAULT_FONT_FAMILIES = [
+  { value: "", label: __("Default") },
+  { value: "Arial, sans-serif", label: "Arial" },
+  { value: "Georgia, serif", label: "Georgia" },
+  { value: "'Helvetica Neue', Helvetica, sans-serif", label: "Helvetica" },
+  { value: "'Times New Roman', Times, serif", label: "Times New Roman" },
+  { value: "Verdana, sans-serif", label: "Verdana" },
+  { value: "'Trebuchet MS', sans-serif", label: "Trebuchet MS" },
+  { value: "'Courier New', monospace", label: "Courier New" },
+  { value: "system-ui, sans-serif", label: "System UI" },
+  { value: "'Segoe UI', sans-serif", label: "Segoe UI" },
+  { value: "Roboto, sans-serif", label: "Roboto" },
+  { value: "'Open Sans', sans-serif", label: "Open Sans" },
+  { value: "Lato, sans-serif", label: "Lato" },
+  { value: "Montserrat, sans-serif", label: "Montserrat" },
+  { value: "Poppins, sans-serif", label: "Poppins" },
+  { value: "'Playfair Display', serif", label: "Playfair Display" },
+  { value: "Raleway, sans-serif", label: "Raleway" },
+  { value: "'Source Sans Pro', sans-serif", label: "Source Sans Pro" },
+  { value: "Inter, sans-serif", label: "Inter" },
+];
+
+const useThemeFontFamilies = () => {
+  return useSelect((select) => {
+    try {
+      const settings = select("core/block-editor").getSettings();
+      const fontFamilies =
+        settings?.typography?.fontFamilies ||
+        settings?.__experimentalFeatures?.typography?.fontFamilies;
+      if (!fontFamilies) return [];
+      const allFonts = [
+        ...(fontFamilies.theme || []),
+        ...(fontFamilies.custom || []),
+      ];
+      return allFonts.map((f) => ({
+        value: f.fontFamily,
+        label: f.name || f.slug,
+      }));
+    } catch (e) {
+      return [];
+    }
+  }, []);
+};
+
+const useFontFamilies = () => {
+  const themeFonts = useThemeFontFamilies();
+  if (themeFonts.length === 0) return DEFAULT_FONT_FAMILIES;
+  const defaultValues = new Set(DEFAULT_FONT_FAMILIES.map((f) => f.value));
+  const uniqueThemeFonts = themeFonts.filter(
+    (f) => f.value && !defaultValues.has(f.value)
+  );
+  return [
+    { value: "", label: __("Default") },
+    ...uniqueThemeFonts,
+    ...DEFAULT_FONT_FAMILIES.slice(1),
+  ];
+};
 
 const FontControl = ( props ) => {
     const { value, onChange, font } = props;
-    const { fontSize, fontWeight, fontStyle, textDecoration, textTransform } =
+    const { fontFamily, fontSize, fontWeight, fontStyle, textDecoration, textTransform } =
       value;
+    const fontFamilies = useFontFamilies();
 
     return (
       <>
+        {font && font.family && (
+          <PanelRow>
+            <div style={{ width: "100%" }}>
+              <ComboboxControl
+                label={__("Font Family")}
+                value={fontFamily || ""}
+                options={fontFamilies}
+                onChange={(newValue) =>
+                  onChange({ ...value, fontFamily: newValue || undefined })
+                }
+                allowReset
+              />
+            </div>
+          </PanelRow>
+        )}
         {font && font.size && (
           <PanelRow>
             <div style={{ width: "100%" }}>

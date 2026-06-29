@@ -63,7 +63,7 @@ const StyleControl = ( props ) => {
           </div>
         )}
         {border && BorderControl && (
-          <div>
+          <div style={{ marginTop: "8px", fontWeight: "bold" }}>
             {labels && <ControlLabel label={__("Border")} />}
             <BorderControl
               value={value}
