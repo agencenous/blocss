@@ -1,3 +1,8 @@
+## v0.4.0
+
+- Add support for font.family
+- Fix default size of borders wgen switching between 2, 3 or 4 params
+
 ## v0.3.4
 
 - Type params in PHP functions
